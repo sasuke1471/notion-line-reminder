@@ -1,16 +1,16 @@
 name: Notion LINE Reminder
 
 on:
-  schedule:
-    - cron: '0 23 * * *' # JST 8:00（GitHubはUTC）
   workflow_dispatch:
+  schedule:
+    - cron: "0 8 * * *"
 
 jobs:
   run:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Node.js
@@ -19,12 +19,13 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
+        working-directory: line-test
         run: npm install
 
       - name: Run reminder script
+        working-directory: line-test
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
-          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
-          LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
-          LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
+          DATABASE_ID: ${{ secrets.DATABASE_ID }}
+          LINE_TOKEN: ${{ secrets.LINE_TOKEN }}
         run: node notion_rule_to_line.js
