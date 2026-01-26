@@ -19,11 +19,9 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        working-directory: line-test
         run: npm install
 
       - name: Run reminder script
-        working-directory: line-test
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           DATABASE_ID: ${{ secrets.DATABASE_ID }}
