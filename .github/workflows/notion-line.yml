@@ -23,4 +23,4 @@ jobs:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           DATABASE_ID: ${{ secrets.DATABASE_ID }}
           LINE_TOKEN: ${{ secrets.LINE_TOKEN }}
-        run: node notion_rule_to_line.js
+        run: node line-test/notion_rule_to_line.js
